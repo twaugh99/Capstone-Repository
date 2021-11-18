@@ -76,7 +76,12 @@ function draw() {
 
 
 
-  ellipse(canvasCircleX, canvasCircleY, 150, 150);
+  if(mode == "Melody"){
+    ellipse(canvasCircleX, canvasCircleY, 100, 100);
+  }
+  if(mode == "Chord"){
+    ellipse(canvasCircleX, canvasCircleY, 200, 200);
+  }
 }
 
 //audio
@@ -141,6 +146,8 @@ let reverbDryWetRange = document.getElementById("reverbDryWetRange");
 //synths
 let melodySynth = new Tone.PolySynth().toDestination();
 let chordSynth = new Tone.PolySynth().toDestination();
+chordSynth.set({ detune: -1000 });
+
 
 let octave = 4;
 let instructionsText = document.getElementById("instructionsText");
@@ -296,6 +303,7 @@ function rotateMode(){
 //colors from https://www.color-hex.com/color-palette/57915
 
 function selectMode(newMode){
+  colorOpacity = 0;
   mode = newMode;
   console.log("mode: " + mode);
   if(mode == "FX"){
