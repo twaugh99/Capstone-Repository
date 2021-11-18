@@ -1,19 +1,26 @@
 html, body {
   background-color: black;
+  height: 100vh;
+  overflow: hidden;
 }
 
 
-#canvas{
-  margin: 0;
-  z-index:1;
-  align-self: center;
-}
 #canvas:hover{
   cursor: none;
 }
 
 #infoDiv{
+  padding-left: 100px;
+}
+
+#modeText, #welcomeText, #scaleText, #octaveText{
   font-family: 'Courier New', monospace;
+}
+
+
+#welcomeText{
+  color: white;
+  text-align: center;
 }
 
 #modeText{
