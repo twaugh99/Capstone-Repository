@@ -16,24 +16,24 @@ function draw() {
 
   fill(255);
   //drum circles
-  ellipse(150, 50, 50, 50);
-  ellipse(250, 50, 50, 50);
-  ellipse(350, 50, 50, 50);
-  ellipse(450, 50, 50, 50);
-  ellipse(550, 50, 50, 50);
-  ellipse(650, 50, 50, 50);
-  ellipse(750, 50, 50, 50);
-  ellipse(850, 50, 50, 50);
+  // ellipse(150, 50, 50, 50);
+  // ellipse(250, 50, 50, 50);
+  // ellipse(350, 50, 50, 50);
+  // ellipse(450, 50, 50, 50);
+  // ellipse(550, 50, 50, 50);
+  // ellipse(650, 50, 50, 50);
+  // ellipse(750, 50, 50, 50);
+  // ellipse(850, 50, 50, 50);
 
   //melody circles
-  ellipse(150, 550, 50, 50);
-  ellipse(250, 550, 50, 50);
-  ellipse(350, 550, 50, 50);
-  ellipse(450, 550, 50, 50);
-  ellipse(550, 550, 50, 50);
-  ellipse(650, 550, 50, 50);
-  ellipse(750, 550, 50, 50);
-  ellipse(850, 550, 50, 50);
+  // ellipse(150, 550, 50, 50);
+  // ellipse(250, 550, 50, 50);
+  // ellipse(350, 550, 50, 50);
+  // ellipse(450, 550, 50, 50);
+  // ellipse(550, 550, 50, 50);
+  // ellipse(650, 550, 50, 50);
+  // ellipse(750, 550, 50, 50);
+  // ellipse(850, 550, 50, 50);
 
   fill(255, 0 ,0);
   stroke(0);
