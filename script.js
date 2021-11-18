@@ -55,7 +55,7 @@ function draw() {
 
   stroke(255);
   strokeWeight(5);
-  ellipse(mouseX, mouseY, 150, 150);
+  ellipse(windowWidth/2, 200, 150, 150);
 }
 
 //audio
