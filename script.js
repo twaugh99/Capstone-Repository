@@ -1,4 +1,5 @@
 console.log('script loaded');
+
 let key1Pressed = false;
 let key2Pressed = false;
 let key3Pressed = false;
@@ -7,6 +8,15 @@ let key5Pressed = false;
 let key6Pressed = false;
 let key7Pressed = false;
 let key8Pressed = false;
+
+let drum1 = new Audio("default-drumkit/kick.wav");
+let drum2 = new Audio("default-drumkit/cowbell.wav");
+let drum3 = new Audio("default-drumkit/hat.wav");
+let drum4 = new Audio("default-drumkit/perc.wav");
+let drum5 = new Audio("default-drumkit/clap.wav");
+let drum6 = new Audio("default-drumkit/rimshot.wav");
+let drum7 = new Audio("default-drumkit/snare.wav");
+let drum8 = new Audio("default-drumkit/crash.wav");
 
 let fillColor = '#FFFFFF';
 let colorOpacity = 255;
@@ -29,19 +39,14 @@ function setColor(note){
 
 //canvas
 function setup() {
-  let canvasInit = createCanvas(windowWidth, 400);
+  let canvasInit = createCanvas(windowWidth, 600);
   console.log(windowWidth, windowHeight);
-
   canvasInit.id('canvas');
 }
-
-
-
 
 function draw() {
   // console.log(windowWidth, windowHeight);
   background(0);
-
   fill(fillR, fillG, fillB, colorOpacity);
 
   if(colorOpacity > 0){
@@ -50,9 +55,7 @@ function draw() {
 
   stroke(255);
   strokeWeight(5);
-
   ellipse(mouseX, mouseY, 150, 150);
-  rect(0, 0, )
 }
 
 //audio
@@ -89,13 +92,10 @@ console.log('active scale is ' + activeScale);
 
 
 let melodySynth = new Tone.PolySynth().toDestination();
-
 let chordSynth = new Tone.PolySynth().toDestination();
 
 let octave = 4;
 let octaveText = document.getElementById("octaveText");
-
-
 
 
 function attackNote(note){
@@ -176,14 +176,7 @@ function releaseChord(chord){
 }
 
 
-let drum1 = new Audio("default-drumkit/kick.wav");
-let drum2 = new Audio("default-drumkit/cowbell.wav");
-let drum3 = new Audio("default-drumkit/hat.wav");
-let drum4 = new Audio("default-drumkit/perc.wav");
-let drum5 = new Audio("default-drumkit/clap.wav");
-let drum6 = new Audio("default-drumkit/rimshot.wav");
-let drum7 = new Audio("default-drumkit/snare.wav");
-let drum8 = new Audio("default-drumkit/crash.wav");
+
 
 
 function playDrum(drum){
