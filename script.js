@@ -18,8 +18,10 @@ let drum6 = new Audio("default-drumkit/rimshot.wav");
 let drum7 = new Audio("default-drumkit/snare.wav");
 let drum8 = new Audio("default-drumkit/crash.wav");
 
+
+
 let fillColor = '#FFFFFF';
-let colorOpacity = 255;
+let colorOpacity = 0;
 let now = Tone.now();
 
 let fillR = 0;
@@ -30,11 +32,21 @@ let colorR = ['', '255', '255', '255', '0', '0', '75', '148', '255'];
 let colorG = ['', '0', '127', '255', '255', '0', '0', '0', '0'];
 let colorB = ['', '0', '0', '0', '0', '255', '130', '211', '0'];
 
+
+let canvasCircleX = 400;
+let canvasCircleY = 450;
+
+
+
 function setColor(note){
   fillR = colorR[note];
   fillG = colorG[note];
   fillB = colorB[note];
   colorOpacity = 255;
+  canvasCircleY = 450;
+  console.log(note);
+  canvasCircleX = (((windowWidth/10)*note)+(windowWidth/20));
+  console.log(canvasCircleX);
 }
 
 //canvas
@@ -44,18 +56,27 @@ function setup() {
   canvasInit.id('canvas');
 }
 
+
 function draw() {
   // console.log(windowWidth, windowHeight);
   background(0);
-  fill(fillR, fillG, fillB, colorOpacity);
+  noStroke();
 
+
+  fill(255);
   if(colorOpacity > 0){
-    colorOpacity = colorOpacity - 5;
+    colorOpacity = colorOpacity - 6;
   }
 
-  stroke(255);
-  strokeWeight(5);
-  ellipse(windowWidth/2, 200, 150, 150);
+  fill(fillR, fillG, fillB, colorOpacity);
+
+  if(canvasCircleY > 0){
+    canvasCircleY = canvasCircleY - 6;
+  }
+
+
+
+  ellipse(canvasCircleX, canvasCircleY, 150, 150);
 }
 
 //audio
@@ -89,14 +110,46 @@ let scale_B_Minor = ["B", "C#", "D", "E", "F#", "G", "A"];
 let activeScale = scale_C_Major;
 console.log('active scale is ' + activeScale);
 
+//audio effects
+let chorusFrequency = 0;
+let chorusDelayTime = 0;
+let chorusDepth = 0;
+let chorus = new Tone.Chorus(chorusFrequency, chorusDelayTime, chorusDepth).toDestination().start();
+
+let chorusFrequencyRange = document.getElementById("chorusFrequencyRange");
+let chorusDelayTimeRange = document.getElementById("chorusDelayTimeRange");
+let chorusDepthRange = document.getElementById("chorusDepthRange");
+let chorusDryWetRange = document.getElementById("chorusDepthRange");
+chorusDepthRange.addEventListener("input", ()=>{
+  chorusDepth = chorusDepthRange.value;
+});
 
 
+let reverbDelayTime = 0;
+let reverbDepth = 0;
+let reverbDryWet = 0;
+
+let reverbDelayTimeRange = document.getElementById("reverbDelayTimeRange");
+let reverbDepthRange = document.getElementById("reverbDepthRange");
+let reverbDryWetRange = document.getElementById("reverbDryWetRange");
+
+
+
+// chorusDelayTimeRange
+// chorusDepthRange
+
+//synths
 let melodySynth = new Tone.PolySynth().toDestination();
 let chordSynth = new Tone.PolySynth().toDestination();
 
 let octave = 4;
+let instructionsText = document.getElementById("instructionsText");
 let octaveText = document.getElementById("octaveText");
+let effectsDiv = document.getElementById("effectsDiv");
 
+effectsDiv.style.display = "none";
+octaveText.style.display = "none";
+scaleText.style.display = "none";
 
 function attackNote(note){
   now = Tone.now();
@@ -113,9 +166,9 @@ function releaseNote(note){
   console.log('note ' + note + ' released');
   now = Tone.now();
   if(note == 8){
-    melodySynth.triggerRelease(activeScale[0]+(octave+2), now + .3);
+    melodySynth.triggerRelease(activeScale[0]+(octave+2), now + .1);
   } else {
-    melodySynth.triggerRelease(activeScale[(note-1)]+(octave+1), now + .3);
+    melodySynth.triggerRelease(activeScale[(note-1)]+(octave+1), now + .1);
   }
 }
 
@@ -156,27 +209,24 @@ function releaseChord(chord){
     let first = chord - 1;
     let third = chord + 1;
     let fifth = chord + 3;
-    chordSynth.triggerRelease([activeScale[first]+octave, activeScale[third]+octave, activeScale[fifth]+octave], now + .1);
+    chordSynth.triggerRelease([activeScale[first]+octave, activeScale[third]+octave, activeScale[fifth]+octave], now + .05);
   }
   if(chord == 4 || chord == 5){
     let first = chord - 1;
     let third = chord + 1;
     let fifth = chord - 4;
-    chordSynth.triggerRelease([activeScale[first]+octave, activeScale[third]+octave, activeScale[fifth]+(octave+1)], now + .1);
+    chordSynth.triggerRelease([activeScale[first]+octave, activeScale[third]+octave, activeScale[fifth]+(octave+1)], now + .05);
   }
   if(chord == 6 || chord == 7){
     let first = chord - 1;
     let third = chord - 6;
     let fifth = chord - 4;
-    chordSynth.triggerRelease([activeScale[first]+octave, activeScale[third]+(octave+1), activeScale[fifth]+(octave+1)], now + .1);
+    chordSynth.triggerRelease([activeScale[first]+octave, activeScale[third]+(octave+1), activeScale[fifth]+(octave+1)], now + .05);
   }
   if(chord == 8){
-    chordSynth.triggerRelease([activeScale[0]+(octave+1), activeScale[2]+(octave+1), activeScale[4]+(octave+1)], now + .1);
+    chordSynth.triggerRelease([activeScale[0]+(octave+1), activeScale[2]+(octave+1), activeScale[4]+(octave+1)], now + .05);
   }
 }
-
-
-
 
 
 function playDrum(drum){
@@ -243,18 +293,45 @@ function rotateMode(){
   modeText.innerHTML = "Current Mode: " + mode;
 }
 
+//colors from https://www.color-hex.com/color-palette/57915
+
 function selectMode(newMode){
   mode = newMode;
   console.log("mode: " + mode);
+  if(mode == "FX"){
+    canvas.style.display = "none";
+    effectsDiv.style.display = "unset";
+    modeText.style.color = "#ff00c1";
+    instructionsText.innerHTML = "Move the sliders to modify the effects; The melody synth can still be played"
+  } else {
+    canvas.style.display = "unset";
+    effectsDiv.style.display = "none";
+  }
+
+  if(mode == "Melody" || mode == "Chord"){
+    scaleText.style.display = "unset";
+    octaveText.style.display = "unset";
+    if(mode == "Melody"){
+      modeText.style.color = "#9600ff";
+      instructionsText.innerHTML = "Press keys A-K to play the Melody Synth; Press Z or X to change octave"
+    } else {
+      modeText.style.color = "#4900ff";
+      instructionsText.innerHTML = "Press keys A-K to play the Chord Synth; Press Z or X to change octave"
+    }
+  } else {
+    scaleText.style.display = "none";
+    octaveText.style.display = "none";
+  }
+  if(mode == "Drum"){
+    modeText.style.color = "#00b8ff";
+    instructionsText.innerHTML = "Press Keys A-K to Play Drums";
+  }
   modeText.innerHTML = "Current Mode: " + mode;
   fillColor = "#ffffff";
 }
 
 //event listeners for keyboard inputs
 document.addEventListener('keydown', function(event) {
-  if(event.code == 'KeyP'){
-    selectMode("FX");
-  }
 
   if(event.code == 'Digit1'){
     selectMode("Drum");
@@ -268,8 +345,13 @@ document.addEventListener('keydown', function(event) {
     selectMode("Melody");
   }
 
-  if(mode == "Melody"){
+  if(event.code == 'Digit4'){
+    selectMode("FX");
+  }
+
+  if(mode == "Melody" || mode == "FX"){
     //keys a-k play notes of the scale when in melody mode
+
     if(event.code == 'KeyA'){
       if(key1Pressed == false){
         key1Pressed = true;
@@ -426,7 +508,7 @@ document.addEventListener('keydown', function(event) {
 
   //press x to go up an octave, press z to go down an octave
   if(event.code == 'KeyX') {
-    if(octave < 6){
+    if(octave < 5){
       octave++;
       console.log(octave);
       octaveText.innerHTML = "Current Octave: " + octave;
@@ -444,7 +526,7 @@ document.addEventListener('keydown', function(event) {
 
 //event listeners for keyboard inputs
 document.addEventListener('keyup', function(event) {
-  if(mode == "Melody"){
+  if(mode == "Melody" || mode == "FX"){
     //keys a-k play notes of the scale when in melody mode
     if(event.code == 'KeyA'){
       key1Pressed = false;

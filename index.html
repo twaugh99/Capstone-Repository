@@ -6,11 +6,98 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <h1 id="welcomeText">Capstone Prototype</h1>
+    <h1 id="welcomeText">Capstone Prototype 11/19 (Press Number Keys 1-4 to Change Mode)</h1>
+    <h1 id="modeText">Current Mode: Drum</h1>
+    <h1 id="instructionsText">Press Keys A-K to Play Drums</h1>
     <div id="infoDiv">
-      <h1 id="modeText">Current Mode: Drum</h1>
       <h1 id="scaleText">Current Scale: C Major</h1>
       <h1 id="octaveText">Current Octave: 4</h1>
+    </div>
+
+    <div id="effectsDiv">
+
+      <div id="synthsEffectsDiv">
+        <div id="melodySynthEffectDiv">
+          <h3 class="effectsHeading">Melody Synth:</h3>
+          <label for="melodySynthWaveformDropdown">Waveform:</label>
+          <select id="melodySynthWaveformDropdown" class="waveformDropdown">
+            <option value="sine">Sine</option>
+            <option value="triangle">Triangle</option>
+            <option value="sawtooth">Sawtooth</option>
+            <option value="square">Square</option>
+          </select>
+          <div id="melodySynthEffectSlidersDiv">
+            <label for="gainMelodySynthRange" class="synthParameter">Gain</label>
+            <input type="range" id="gainMelodySynthRange" class="synthParameter" min="0" max="10" value="5">
+            <label for="attackMelodySynthRange" class="synthParameter">Attack</label>
+            <input type="range" id="attackMelodySynthRange" class="synthParameter" min="0" max="10" value="0">
+            <label for="sustainMelodySynthRange" class="synthParameter">Sustain</label>
+            <input type="range" id="sustainMelodySynthRange" class="synthParameter" min="0" max="10" value="0">
+            <label for="releaseMelodySynthRange" class="synthParameter">Release</label>
+            <input type="range" id="releaseMelodySynthRange" class="synthParameter" min="0" max="10" value="0">
+          </div>
+        </div>
+        <div id="chordSynthEffectDiv">
+          <h3 class="effectsHeading">Chord Synth:</h3>
+          <label for="chordSynthWaveformDropdown">Waveform:</label>
+          <select id="chordSynthWaveformDropdown" class="waveformDropdown">
+            <option value="sine" >Sine</option>
+            <option value="triangle">Triangle</option>
+            <option value="sawtooth">Sawtooth</option>
+            <option value="square">Square</option>
+          </select>
+          <div id="chordSynthEffectSlidersDiv">
+            <label for="gainChordSynthRange" class="synthParameter" >Gain</label>
+            <input type="range" id="gainChordSynthRange" class="synthParameter" min="0" max="10" value="5">
+            <label for="attackChordSynthRange" class="synthParameter">Attack</label>
+            <input type="range" id="attackChordSynthRange" class="synthParameter" min="0" max="10" value="0">
+            <label for="sustainChordSynthRange" class="synthParameter">Sustain</label>
+            <input type="range" id="sustainChordSynthRange" class="synthParameter" min="0" max="10" value="0">
+            <label for="releaseChordSynthRange" class="synthParameter">Release</label>
+            <input type="range" id="releaseChordSynthRange" class="synthParameter" min="0" max="10" value="0">
+          </div>
+        </div>
+      </div>
+
+      <div id="audioEffectsDiv">
+        <div id="reverbDiv" class="effectsDiv">
+          <h3 class="effectsHeading">Reverb:</h3>
+          <div id="reverbSlidersDiv">
+            <label for="reverbDelayTimeRange" class="synthParameter">Decay</label>
+            <input type="range" id="reverbDelayTimeRange" class="synthParameter" min="0" max="50" value="0">
+            <label for="reverbDepthRange" class="synthParameter">Pre-Delay</label>
+            <input type="range" id="reverbDepthRange" class="synthParameter" min="0" max="4" value = "0">
+            <label for="reverbDryWetRange" class="synthParameter">Dry/Wet</label>
+            <input type="range" id="reverbDryWetRange" class="synthParameter" min="0" max="100" value = "0">
+          </div>
+        </div>
+
+        <div id="chorusDiv" class="effectsDiv">
+          <h3 class="effectsHeading">Chorus:</h3>
+          <div id="chorusSlidersDiv">
+            <label for="chorusFrequencyRange" class="synthParameter">Frequency</label>
+            <input type="range" id="chorusFrequencyRange" class="synthParameter" min="0" max="8" value="0">
+            <label for="chorusDelayTimeRange" class="synthParameter">Delay Time</label>
+            <input type="range" id="chorusDelayTimeRange" class="synthParameter" min="0" max="50" value="0">
+            <label for="chorusDepthRange" class="synthParameter">Depth</label>
+            <input type="range" id="chorusDepthRange" class="synthParameter" min="0" max="4" value = "0">
+            <label for="chorusDryWetRange" class="synthParameter">Dry/Wet</label>
+            <input type="range" id="chorusDryWetRange" class="synthParameter" min="0" max="100" value = "0">
+          </div>
+        </div>
+
+        <div id="distortionDiv" class="effectsDiv">
+          <h3 class="effectsHeading">Distortion:</h3>
+          <div id="distortionSlidersDiv">
+            <label for="distortionAmountRange" class="synthParameter">Amount</label>
+            <input type="range" id="distortionAmountRange" min="0" max="8" value="0">
+            <label for="distortionOversampleRange" class="synthParameter">Oversampling</label>
+            <input type="range" id="distortionOversampleRange"class="synthParameter" min="0" max="2" value="0">
+            <label for="distortionDryWetRange" class="synthParameter">Dry/Wet</label>
+            <input type="range" id="distortionDryWetRange"class="synthParameter" min="0" max="100" value = "0">
+          </div>
+        </div>
+      </div>
     </div>
 
     <script src="tone.js" charset="utf-8"></script>
